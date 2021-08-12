@@ -1,0 +1,5 @@
+Only .c4d format have complete model.
+
+.FBX with all objects have more than 500 MB
+
+.3DS can't export this project.

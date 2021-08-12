@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Fichiers sources">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Fichiers de ressources">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Fichiers sources\System">
+      <UniqueIdentifier>{896dddcd-5dbd-476c-b792-9dcac2b17bc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\GraphicsAPI">
+      <UniqueIdentifier>{ea2ee2e9-20fb-46e1-96af-265c6bbe1501}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Scene">
+      <UniqueIdentifier>{3b097719-8687-4d3f-b84b-15961e447495}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\System\zlib">
+      <UniqueIdentifier>{60619e3f-2a6d-4db3-a5e3-248a3932bdbf}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="vkTuto.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\System\Application.cpp">
+      <Filter>Fichiers sources\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\System\Log.cpp">
+      <Filter>Fichiers sources\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\GraphicsAPI\vkApiInstance.cpp">
+      <Filter>Fichiers sources\GraphicsAPI</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Application.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="vkInstance.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
