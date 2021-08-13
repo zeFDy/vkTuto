@@ -7,6 +7,10 @@
 #include	"Log.h"
 #include	"../../External/GLFW/glfw3.h"
 #include	"../GraphicsAPI/vkApiInstance.h"
+#include	"../GraphicsAPI/vkApiDevices.h"
+#include	"../GraphicsAPI/vkApiSwapChain.h"
+
+
 
 Application::Application()
 {
@@ -19,6 +23,8 @@ Application::~Application()
 		std::cout << "~Application()\n";
 		LogInsert("~Application()\n");
 
+		delete(myVkApiSwapChain);
+		delete(myVkApiDevices);
 		delete(myVkApiInstance);
 
 		glfwDestroyWindow(myWindow);
@@ -56,8 +62,9 @@ void	Application::Init()
 		//std::cout << "myGraphicAPI is " << myGraphicAPI->GetTypeString() << " - " << myGraphicAPI->GetType() << "\n";
 		glfwSetWindowUserPointer(myWindow, this);
 		
-		myVkApiInstance = new vkApiInstance((char*)APPLICATION_NAME, myWindow);
-
+		myVkApiInstance		= new vkApiInstance((char*)APPLICATION_NAME, myWindow);
+		myVkApiDevices		= new vkApiDevices(myVkApiInstance);
+		myVkApiSwapChain	= new vkApiSwapChain(myVkApiInstance, myVkApiDevices);
 
 }
 

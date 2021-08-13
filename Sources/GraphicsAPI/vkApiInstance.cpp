@@ -30,6 +30,8 @@ vkApiInstance::vkApiInstance(char* ourApplicationName, GLFWwindow* window)
 		VkApplicationInfo		ourAppInfo		= {};
 		VkInstanceCreateInfo	ourInstanceInfo = {};
 
+		ourWindow = window;
+
 		if (enableValidationLayers && !CheckValidationLayerSupport()) 
 		{
 			throw std::runtime_error("validation layers requested, but not available!");
@@ -189,4 +191,20 @@ std::vector<const char*> vkApiInstance::GetRequiredExtensions()
     }
 
     return extensions;
+}
+
+
+VkInstance		vkApiInstance::GetInstance()
+{
+	return thisInstance;
+}
+
+VkSurfaceKHR	vkApiInstance::GetSurface()
+{
+	return	ourSurface;
+}
+
+GLFWwindow*		vkApiInstance::GetWindow()
+{
+	return ourWindow;
 }

@@ -26,8 +26,11 @@ const std::vector<const char*> deviceExtensions =
 class vkApiInstance
 {
 
-public:				vkApiInstance(char* caOurApplicationName, GLFWwindow* window);
-					~vkApiInstance();
+public:									vkApiInstance(char* caOurApplicationName, GLFWwindow* window);
+										~vkApiInstance();
+						  VkInstance	GetInstance();
+						VkSurfaceKHR	GetSurface();
+						 GLFWwindow*	GetWindow();
 
 private:						void	EnumLayers(void);
 								bool	CheckValidationLayerSupport();
@@ -35,5 +38,6 @@ private:						void	EnumLayers(void);
 			VkDebugUtilsMessengerEXT    DebugMessenger;
     					  VkInstance	thisInstance;
 						VkSurfaceKHR	ourSurface;
+						 GLFWwindow*	ourWindow;
 };
 

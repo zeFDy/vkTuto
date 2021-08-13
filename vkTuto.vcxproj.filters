@@ -39,12 +39,21 @@
     <ClCompile Include="Sources\GraphicsAPI\vkApiInstance.cpp">
       <Filter>Fichiers sources\GraphicsAPI</Filter>
     </ClCompile>
+    <ClCompile Include="Sources\GraphicsAPI\vkApiDevices.cpp">
+      <Filter>Fichiers sources\GraphicsAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\GraphicsAPI\vkApiSwapChain.cpp">
+      <Filter>Fichiers sources\GraphicsAPI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Application.h">
+    <ClInclude Include="Sources\GraphicsAPI\vkApiDevices.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="vkInstance.h">
+    <ClInclude Include="Sources\GraphicsAPI\vkApiInstance.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\GraphicsAPI\vkApiSwapChain.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>

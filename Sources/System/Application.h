@@ -2,6 +2,8 @@
 
 #include	"../../External/GLFW/glfw3.h"
 #include	"../GraphicsAPI/vkApiInstance.h"
+#include	"../GraphicsAPI/vkApiDevices.h"
+#include	"../GraphicsAPI/vkApiSwapChain.h"
 
 #define	WIDTH				800
 #define HEIGHT				600
@@ -16,11 +18,12 @@ public:				Application();
 
 private:
 
-	bool			    bDiscret = false;
-	bool			    bFullScreen = false;
+				  bool	bDiscret = false;
+				  bool	bFullScreen = false;
 
-	GLFWwindow*			myWindow;
-	vkApiInstance*		myVkApiInstance;
-
+		   GLFWwindow*	myWindow;
+		vkApiInstance*	myVkApiInstance;
+		 vkApiDevices*	myVkApiDevices;	
+	   vkApiSwapChain*	myVkApiSwapChain;
 };
 
