@@ -15,7 +15,7 @@ vkApiDevices::vkApiDevices(	vkApiInstance*	myVkApiInstance)
 
 vkApiDevices::~vkApiDevices()
 {
-
+    vkDestroyDevice(ourLogicalDevice, nullptr);
 }
 
 void vkApiDevices::PickPhysicalDevice() 

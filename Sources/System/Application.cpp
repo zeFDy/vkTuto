@@ -9,6 +9,7 @@
 #include	"../GraphicsAPI/vkApiInstance.h"
 #include	"../GraphicsAPI/vkApiDevices.h"
 #include	"../GraphicsAPI/vkApiSwapChain.h"
+#include	"../GraphicsAPI/vkApiRenderPass.h"
 
 
 
@@ -23,10 +24,12 @@ Application::~Application()
 		std::cout << "~Application()\n";
 		LogInsert("~Application()\n");
 
+		delete(myvkApiDescriptorSetLayout);
+		delete(myVkApiRenderPass);
 		delete(myVkApiSwapChain);
 		delete(myVkApiDevices);
 		delete(myVkApiInstance);
-
+		
 		glfwDestroyWindow(myWindow);
 		glfwTerminate();
 }
@@ -62,10 +65,11 @@ void	Application::Init()
 		//std::cout << "myGraphicAPI is " << myGraphicAPI->GetTypeString() << " - " << myGraphicAPI->GetType() << "\n";
 		glfwSetWindowUserPointer(myWindow, this);
 		
-		myVkApiInstance		= new vkApiInstance((char*)APPLICATION_NAME, myWindow);
-		myVkApiDevices		= new vkApiDevices(myVkApiInstance);
-		myVkApiSwapChain	= new vkApiSwapChain(myVkApiInstance, myVkApiDevices);
-
+		myVkApiInstance				= new vkApiInstance((char*)APPLICATION_NAME, myWindow);
+		myVkApiDevices				= new vkApiDevices(myVkApiInstance);
+		myVkApiSwapChain			= new vkApiSwapChain(myVkApiInstance, myVkApiDevices);
+		myVkApiRenderPass			= new vkApiRenderPass(myVkApiDevices, myVkApiSwapChain);
+		myvkApiDescriptorSetLayout	= new vkApiDescriptorSetLayout(myVkApiDevices);
 }
 
 void	Application::Run()

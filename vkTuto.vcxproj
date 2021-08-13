@@ -86,16 +86,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Sources\GraphicsAPI\vkApiDescriptorSetLayout.cpp" />
     <ClCompile Include="Sources\GraphicsAPI\vkApiDevices.cpp" />
     <ClCompile Include="Sources\GraphicsAPI\vkApiInstance.cpp" />
+    <ClCompile Include="Sources\GraphicsAPI\vkApiPipelines.cpp" />
+    <ClCompile Include="Sources\GraphicsAPI\vkApiRenderPass.cpp" />
     <ClCompile Include="Sources\GraphicsAPI\vkApiSwapChain.cpp" />
     <ClCompile Include="Sources\System\Application.cpp" />
     <ClCompile Include="Sources\System\Log.cpp" />
     <ClCompile Include="vkTuto.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Sources\GraphicsAPI\vkApiDescriptorSetLayout.h" />
     <ClInclude Include="Sources\GraphicsAPI\vkApiDevices.h" />
     <ClInclude Include="Sources\GraphicsAPI\vkApiInstance.h" />
+    <ClInclude Include="Sources\GraphicsAPI\vkApiPipelines.h" />
+    <ClInclude Include="Sources\GraphicsAPI\vkApiRenderPass.h" />
     <ClInclude Include="Sources\GraphicsAPI\vkApiSwapChain.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

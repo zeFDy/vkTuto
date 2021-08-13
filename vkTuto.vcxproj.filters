@@ -45,6 +45,15 @@
     <ClCompile Include="Sources\GraphicsAPI\vkApiSwapChain.cpp">
       <Filter>Fichiers sources\GraphicsAPI</Filter>
     </ClCompile>
+    <ClCompile Include="Sources\GraphicsAPI\vkApiRenderPass.cpp">
+      <Filter>Fichiers sources\GraphicsAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\GraphicsAPI\vkApiDescriptorSetLayout.cpp">
+      <Filter>Fichiers sources\GraphicsAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\GraphicsAPI\vkApiPipelines.cpp">
+      <Filter>Fichiers sources\GraphicsAPI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sources\GraphicsAPI\vkApiDevices.h">
@@ -54,6 +63,15 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="Sources\GraphicsAPI\vkApiSwapChain.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\GraphicsAPI\vkApiRenderPass.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\GraphicsAPI\vkApiDescriptorSetLayout.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\GraphicsAPI\vkApiPipelines.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>

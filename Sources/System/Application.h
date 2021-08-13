@@ -4,6 +4,9 @@
 #include	"../GraphicsAPI/vkApiInstance.h"
 #include	"../GraphicsAPI/vkApiDevices.h"
 #include	"../GraphicsAPI/vkApiSwapChain.h"
+#include	"../GraphicsAPI/vkApiRenderPass.h"
+#include	"../GraphicsAPI/vkApiDescriptorSetLayout.h"
+
 
 #define	WIDTH				800
 #define HEIGHT				600
@@ -18,12 +21,15 @@ public:				Application();
 
 private:
 
-				  bool	bDiscret = false;
-				  bool	bFullScreen = false;
+				  //bool	bDiscret = false;
+				  //bool	bFullScreen = false;
 
-		   GLFWwindow*	myWindow;
-		vkApiInstance*	myVkApiInstance;
-		 vkApiDevices*	myVkApiDevices;	
-	   vkApiSwapChain*	myVkApiSwapChain;
+					  GLFWwindow*	myWindow;
+				   vkApiInstance*	myVkApiInstance;
+					vkApiDevices*	myVkApiDevices;	
+				  vkApiSwapChain*	myVkApiSwapChain;
+				vkApiRenderPass *	myVkApiRenderPass;
+		vkApiDescriptorSetLayout*	myvkApiDescriptorSetLayout;
+	  
 };
 

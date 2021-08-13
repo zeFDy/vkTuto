@@ -4,7 +4,7 @@
 #include	<vector>
 #include	<iostream>
 #include	<iomanip>
-
+#include	"../System/Log.h"
 
 VkResult CreateDebugUtilsMessengerEXT(VkInstance instance, const VkDebugUtilsMessengerCreateInfoEXT* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkDebugUtilsMessengerEXT* pDebugMessenger)
 {
@@ -17,10 +17,40 @@ VkResult CreateDebugUtilsMessengerEXT(VkInstance instance, const VkDebugUtilsMes
 		}
 }
 
+void DestroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMessengerEXT debugMessenger, const VkAllocationCallbacks* pAllocator)
+{
+    auto func = (PFN_vkDestroyDebugUtilsMessengerEXT)vkGetInstanceProcAddr(instance, "vkDestroyDebugUtilsMessengerEXT");
+    if (func != nullptr) {
+        func(instance, debugMessenger, pAllocator);
+    }
+}
+
 //static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity, VkDebugUtilsMessageTypeFlagsEXT messageType, const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData, void* pUserData) 
 static VkBool32 DebugCallback(VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity, VkDebugUtilsMessageTypeFlagsEXT messageType, const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData, void* pUserData)
 {
-		std::cerr << "validation layer: " << pCallbackData->pMessage << std::endl;
+		
+		switch (messageSeverity)
+		{
+			case	VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT:			//std::cerr << "[VERBOSE]: " << pCallbackData->pMessage << std::endl;
+																				//LogInsert("[VERBOSE]: %s\n", pCallbackData->pMessage);
+																				break;
+			case	VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT:				//std::cerr << "[INFO]: " << pCallbackData->pMessage << std::endl;
+																				//LogInsert("[INFO]   : %s\n", pCallbackData->pMessage);
+																				break;
+			case	VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT:			//std::cerr << "[WARNING]: " << pCallbackData->pMessage << std::endl;
+																				//LogInsert("[WARNING]: %s\n", pCallbackData->pMessage);
+																				break;
+			case	VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT:				std::cerr << "[ERROR]: " << pCallbackData->pMessage << std::endl;
+																				LogInsert("[ERROR]  : %s\n", pCallbackData->pMessage);
+																				break;
+			case	VK_DEBUG_UTILS_MESSAGE_SEVERITY_FLAG_BITS_MAX_ENUM_EXT:		//std::cerr << "[MAX_ENUM_EXT]: " << pCallbackData->pMessage << std::endl;
+																				LogInsert("[MAX_ENUM_EXT]: %s\n", pCallbackData->pMessage);
+																				break;
+			default:															std::cerr << "validation layer: " << pCallbackData->pMessage << std::endl;
+																				LogInsert("validation layer: %s\n", pCallbackData->pMessage);
+																				
+
+		}
 		return VK_FALSE;
 }
 
@@ -110,6 +140,13 @@ vkApiInstance::vkApiInstance(char* ourApplicationName, GLFWwindow* window)
 
 vkApiInstance::~vkApiInstance()
 {
+
+		if (enableValidationLayers) 
+		{
+			DestroyDebugUtilsMessengerEXT(thisInstance, DebugMessenger, nullptr);
+		}
+
+	    vkDestroySurfaceKHR(thisInstance, ourSurface, nullptr);
 		vkDestroyInstance(thisInstance, NULL);
 }
 

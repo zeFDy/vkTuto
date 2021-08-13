@@ -7,18 +7,72 @@
 
 vkApiSwapChain::vkApiSwapChain(vkApiInstance *ourInstance, vkApiDevices *ourDevices)
 {
+	ourPhysicalDevice	= ourDevices->GetPhysicalDevice();
+	ourLogicalDevice	= ourDevices->GetLogicalDevice();
+	
 	CreateSwapChain(ourInstance, ourDevices);
+	CreateImageViews();
 }
 
 vkApiSwapChain::~vkApiSwapChain()
 {
+	CleanupSwapChain();
+}
 
+void vkApiSwapChain::CleanupSwapChain() 
+{
+	/*
+    vkDestroyImageView(device, depthImageView, nullptr);
+    vkDestroyImage(device, depthImage, nullptr);
+    vkFreeMemory(device, depthImageMemory, nullptr);
+	*/
+
+    for (auto framebuffer : swapChainFramebuffers) 
+	{
+        vkDestroyFramebuffer(ourLogicalDevice, framebuffer, nullptr);
+    }
+
+   /*
+    vkFreeCommandBuffers(device, commandPool, static_cast<uint32_t>(commandBuffersMainLoop.size()), commandBuffersMainLoop.data());
+    vkFreeCommandBuffers(device, commandPool, static_cast<uint32_t>(commandBuffersSplash.size()),   commandBuffersSplash.data());
+
+    vkDestroyPipeline(device, graphicsPipeline3dOneTexure,      nullptr);
+    vkDestroyPipeline(device, graphicsPipeline3dOneTexureYGoGg, nullptr);
+    vkDestroyPipelineLayout(device, pipelineLayout, nullptr);
+
+    vkDestroyPipeline(device, graphicsPipelineQuad, nullptr);
+    vkDestroyPipelineLayout(device, pipelineLayoutQuad, nullptr);
+
+    vkDestroyPipeline(device, graphicsPipelineQuadOverlay, nullptr);
+    vkDestroyPipelineLayout(device, pipelineLayoutQuadOverlay, nullptr);
+
+
+    vkDestroyRenderPass(device, renderPass, nullptr);
+	*/
+
+    for (auto imageView : swapChainImageViews) 
+    {
+        vkDestroyImageView(ourLogicalDevice, imageView, nullptr);
+    }
+
+    vkDestroySwapchainKHR(ourLogicalDevice, thisSwapChain, nullptr);
+
+	/*
+    for (size_t i = 0; i < swapChainImages.size(); i++) 
+    {
+        vkDestroyBuffer(device, uniformBuffers[i], nullptr);
+        vkFreeMemory(device, uniformBuffersMemory[i], nullptr);
+    }
+	*/
+
+	/*
+    vkDestroyDescriptorPool(device, newDescriptorPool, nullptr);
+    vkDestroyDescriptorPool(device, descriptorPool, nullptr);
+	*/
 }
 
 void vkApiSwapChain::CreateSwapChain(vkApiInstance *ourInstance, vkApiDevices *ourDevices) 
 {
-	VkPhysicalDevice    ourPhysicalDevice	= ourDevices->GetPhysicalDevice();
-	VkDevice			ourLogicalDevice	= ourDevices->GetLogicalDevice();
 	
 	SwapChainSupportDetails swapChainSupport =	 ourDevices->GetQuerySwapChainSupport();
 
@@ -75,6 +129,39 @@ void vkApiSwapChain::CreateSwapChain(vkApiInstance *ourInstance, vkApiDevices *o
     swapChainExtent = extent;
 }
 
+void vkApiSwapChain::CreateImageViews() 
+{
+    swapChainImageViews.resize(swapChainImages.size());
+
+    for (uint32_t i = 0; i < swapChainImages.size(); i++) 
+    {
+        swapChainImageViews[i] = CreateImageView(swapChainImages[i], swapChainImageFormat, VK_IMAGE_ASPECT_COLOR_BIT);
+    }
+}
+
+VkImageView vkApiSwapChain::CreateImageView(VkImage image, VkFormat format, VkImageAspectFlags aspectFlags)
+{
+    VkImageViewCreateInfo viewInfo{};
+    viewInfo.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
+    viewInfo.image = image;
+    viewInfo.viewType = VK_IMAGE_VIEW_TYPE_2D;
+    viewInfo.format = format;
+    viewInfo.subresourceRange.aspectMask = aspectFlags;
+    viewInfo.subresourceRange.baseMipLevel = 0;
+    viewInfo.subresourceRange.levelCount = 1;
+    viewInfo.subresourceRange.baseArrayLayer = 0;
+    viewInfo.subresourceRange.layerCount = 1;
+
+    VkImageView imageView;
+    if (vkCreateImageView(ourLogicalDevice, &viewInfo, nullptr, &imageView) != VK_SUCCESS)
+    {
+        throw std::runtime_error("failed to create texture image view!");
+    }
+
+    return imageView;
+}
+
+
 VkSurfaceFormatKHR vkApiSwapChain::ChooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats) 
 {
     for (const auto& availableFormat : availableFormats) 
@@ -123,4 +210,9 @@ VkExtent2D vkApiSwapChain::ChooseSwapExtent(vkApiInstance *ourInstance, const Vk
 
         return actualExtent;
     }
+}
+
+VkFormat	vkApiSwapChain::GetSwapChainImageFormat()
+{
+	return swapChainImageFormat;
 }
